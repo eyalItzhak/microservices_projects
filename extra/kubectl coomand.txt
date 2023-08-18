@@ -1,0 +1,2 @@
+kubectl apply -f posts.yaml  ==> run kubectl pod
+kubectl get pods  ==> get all running pods
