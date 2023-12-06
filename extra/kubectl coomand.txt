@@ -1,2 +1,7 @@
+kubectl version => version of kube
 kubectl apply -f posts.yaml  ==> run kubectl pod
 kubectl get pods  ==> get all running pods
+kubectl exec -it posts sh ==> run command inside of pods , in this case open shell 
+kubectl logs posts => logs of pods
+kubectl delete pod posts => delete pod posts
+kubectl describe pod posts => extra info about running pod
