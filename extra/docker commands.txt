@@ -28,6 +28,9 @@ docker commit -c 'CMD ["radius-server"]' ce7a189ea9f8 ==> create an image from t
 
 docker commit -c "CMD 'redis-server'" ce7a189ea9f8  ==> same as before but for Windows.
 
+docker push eyalpross101/posts ==> push to dockerHub
+
+
 
 
 
