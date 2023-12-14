@@ -1,0 +1,32 @@
+#deployment of event-bus
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-depl
+spec:
+  replicas: 1 #Running pods
+  selector: # selector and metadata working together => selector say to the deployment what pods it need to mange
+    matchLabels:
+      app: event-bus #seek the identify call "event-bus"
+  template: #actual create the pods
+    metadata:
+      labels: #the identify of the pod
+        app: event-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: eyalpross101/event-bus ##latest ==> when run kubectl rollout restart deployment event-bus-depl its take the latest version from docker hub
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-srv
+spec:
+  selector:
+    app: event-bus
+  ports:
+    - name: event-bus
+      protocol: TCP
+      port: 4005 #open port 4005 on the node
+      targetPort: 4005 #direct the traffic inside the node to port 4005
+

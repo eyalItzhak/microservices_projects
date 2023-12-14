@@ -1,0 +1,25 @@
+kubectl version => version of kube
+kubectl apply -f posts.yaml  ==> run kubectl pod
+kubectl get pods  ==> get all running pods
+kubectl exec -it posts sh ==> run command inside of pods , in this case open shell 
+kubectl logs posts => logs of pods
+kubectl delete pod posts => delete pod posts
+kubectl describe pod posts => extra info about running pod
+kubectl apply -f .  ==> run all yaml file at one
+
+
+//deployments
+kubectl get deployments =>show all deployments
+kubectl describe deployment posts-depl => extra info about running deployments
+kubectl delete deployment posts-depl =>delete deployment
+kubectl apply -f posts-depl.yaml => update if already create or if not create deployment
+kubectl rollout restart deployment posts-depl => restart deployment
+
+
+//services 
+kubectl apply -f posts-srv.yaml ==> update if already create or if not create services 
+kubectl get services  =>show all services
+kubectl describe service posts-srv ==> extra info about running services
+
+powershell command***
+New-Alias -Name K -Value kubectl  

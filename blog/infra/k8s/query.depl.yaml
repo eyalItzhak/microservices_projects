@@ -1,0 +1,32 @@
+#deployment of query
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-depl
+spec:
+  replicas: 1 #Running pods
+  selector: # selector and metadata working together => selector say to the deployment what pods it need to mange
+    matchLabels:
+      app: query #seek the identify call "query"
+  template: #actual create the pods
+    metadata:
+      labels: #the identify of the pod
+        app: query
+    spec:
+      containers:
+        - name: query
+          image: eyalpross101/query ##latest ==> when run kubectl rollout restart deployment query-depl its take the latest version from docker hub
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: query-srv
+spec:
+  selector:
+    app: query
+  ports:
+    - name: query
+      protocol: TCP
+      port: 4002 #open port 4002 on the node
+      targetPort: 4002 #direct the traffic inside the node to port 4002
+

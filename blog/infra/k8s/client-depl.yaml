@@ -1,0 +1,32 @@
+#deployment of client
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1 #Running pods
+  selector: # selector and metadata working together => selector say to the deployment what pods it need to mange
+    matchLabels:
+      app: client #seek the identify call "client"
+  template: #actual create the pods
+    metadata:
+      labels: #the identify of the pod
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: eyalpross101/client ##latest ==> when run kubectl rollout restart deployment client-depl its take the latest version from docker hub
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+spec:
+  selector:
+    app: client
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000 #open port 3000 on the node
+      targetPort: 3000 #direct the traffic inside the node to port 3000
+
