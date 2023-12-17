@@ -1,0 +1,4 @@
+skaffold dev ==> run skaffold.yaml that do the build of project
+skaffold delete  => kill all pods
+
+
