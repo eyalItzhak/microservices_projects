@@ -21,5 +21,9 @@ kubectl apply -f posts-srv.yaml ==> update if already create or if not create se
 kubectl get services  =>show all services
 kubectl describe service posts-srv ==> extra info about running services
 
+//create env example
+kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf ==> create a object name call "jwt-secret" with value JWT_KEY=asdf ==>*can add more key pair values
+kubectl get secret  ==> show secret objects exist
+
 powershell command***
 New-Alias -Name K -Value kubectl  
