@@ -9,7 +9,7 @@ import { BedRequestError } from "../errors/BedRequestError";
 const router = express.Router();
 
 router.post(
-  "/api/users/singin",
+  "/api/users/signin",
   [
     body("email").isEmail().withMessage("Email must be valid"), //middleware 1
     body("password")

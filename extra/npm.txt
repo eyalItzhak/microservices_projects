@@ -1,0 +1,3 @@
+npm install --save-dev @types/jest @types/supertest jest ts-jest supertest mongodb-memory-server ==> install dependency only if dev mod 
+
+when use RUN npm install --omit=dev its not download dev dependency
