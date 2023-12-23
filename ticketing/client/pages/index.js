@@ -1,5 +1,3 @@
-const index = () => {
-  return <h1>Landing page</h1>;
+export default () => {
+  return <h1>Landing Page</h1>;
 };
-
-export default index;
