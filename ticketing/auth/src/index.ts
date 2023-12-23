@@ -8,7 +8,7 @@ import { signupRouter } from "./routes/signup";
 import { errorHandler } from "./middlewares/error-handler";
 import { NotFoundError } from "./errors/not-found-error";
 import mongoose from "mongoose";
-import cookieSession from "cookie-session";
+import cookieSession from "cookie-session"; // now in res there is req.session property
 
 const app = express();
 app.set("trust proxy", true);

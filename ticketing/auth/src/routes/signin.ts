@@ -1,9 +1,8 @@
 import express, { Request, Response } from "express";
-import { body, validationResult } from "express-validator"; //Middleware that validate the data that came on body from web
+import { body } from "express-validator"; //Middleware that validate the data that came on body from web
 import jwt from "jsonwebtoken";
 import { User } from "../models/users";
 import { Password } from "../services/password";
-import { RequestValidationError } from "../errors/request-validation-error";
 import { validateRequest } from "../middlewares/validate-request";
 import { BedRequestError } from "../errors/BedRequestError";
 
