@@ -7,7 +7,7 @@ deploy:
 build:
   local:
     push: false
-  artifacts:
+  artifacts: #detect change on auth file and change the image
     - image: eyalpross101/auth
       context: auth
       docker:
@@ -15,4 +15,12 @@ build:
       sync:
         manual:
           - src: "src/**/*.ts"
+            dest: .
+    - image: eyalpross101/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
             dest: .
