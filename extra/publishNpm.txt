@@ -1,0 +1,9 @@
+on package =   "name": "@eyaltickets/common" ==>  eyaltickets name of organization name of package common
+
+run 
+git init 
+git add .
+
+npm adduser
+
+npm publish --access public
