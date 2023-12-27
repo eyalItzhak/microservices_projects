@@ -6,6 +6,7 @@ kubectl logs posts => logs of pods
 kubectl delete pod posts => delete pod posts
 kubectl describe pod posts => extra info about running pod
 kubectl apply -f .  ==> run all yaml file at one
+kubectl get namespace ==> get namespace
 
 
 //deployments
@@ -20,6 +21,7 @@ kubectl rollout restart deployment posts-depl => restart deployment
 kubectl apply -f posts-srv.yaml ==> update if already create or if not create services 
 kubectl get services  =>show all services
 kubectl describe service posts-srv ==> extra info about running services
+kubectl get services -n ingress-nginx ==> get services inside a namespace (in this example ingress-nginx)
 
 //create env example
 kubectl create secret generic jwt-secret --from-literal=JWT_KEY=asdf ==> create a object name call "jwt-secret" with value JWT_KEY=asdf ==>*can add more key pair values
