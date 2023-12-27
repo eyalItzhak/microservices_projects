@@ -7,3 +7,6 @@ git add .
 npm adduser
 
 npm publish --access public
+
+//after first publish
+npm publish

@@ -1,10 +1,9 @@
 import express, { Request, Response } from "express";
-import { body, validationResult } from "express-validator";
+import { body } from "express-validator";
 import { User } from "../models/users";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { BedRequestError } from "../errors/BedRequestError";
+import { validateRequest, BedRequestError } from "@eyaltickets/common";
+
 import jwt from "jsonwebtoken";
-import { validateRequest } from "../middlewares/validate-request";
 
 const router = express.Router();
 

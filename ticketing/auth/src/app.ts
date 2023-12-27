@@ -5,8 +5,8 @@ import { currentUserRouter } from "./routes/current-user";
 import { singinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
-import { errorHandler } from "./middlewares/error-handler";
-import { NotFoundError } from "./errors/not-found-error";
+import { errorHandler, NotFoundError } from "@eyaltickets/common";
+
 import cookieSession from "cookie-session"; // now in res there is req.session property
 
 const app = express();
