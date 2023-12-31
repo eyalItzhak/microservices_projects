@@ -15,17 +15,16 @@ spec:
       containers:
         - name: nats
           image: nats-streaming:0.17.0
-          args:
-            [
+          args: [
               "-p",
               "4222",
               "-m",
               "8222",
-              "-hbi",
+              "-hbi", #time of health check
               "5s",
-              "-hbt",
+              "-hbt", #time client to response
               "5s",
-              "-hbf",
+              "-hbf", #time client can fail
               "2",
               "-SD",
               "-cid",
