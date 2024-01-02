@@ -1,5 +1,6 @@
-import nats, { Message } from "node-nats-streaming";
+import nats from "node-nats-streaming";
 import { randomBytes } from "crypto";
+import { TicketCreateListener } from "./events/ticket-created-listenr";
 
 console.clear();
 const stan = nats.connect("ticketing", randomBytes(4).toString("hex"), {
@@ -15,24 +16,7 @@ stan.on("connect", () => {
     process.exit();
   });
 
-  const option = stan
-    .subscriptionOptions()
-    .setManualAckMode(true)
-    .setDeliverAllAvailable()
-    .setDurableName("accounting-server");
-  const subscription = stan.subscribe(
-    "ticket:created",
-    "queue-group-name",
-    option
-  );
-
-  subscription.on("message", (msg: Message) => {
-    const data = msg.getData();
-    if (typeof data === "string") {
-      console.log(`Received event #${msg.getSequence()}, with data: ${data}`);
-    }
-    msg.ack();
-  });
+  new TicketCreateListener(stan).listen();
 });
 
 process.on("SIGINT", () => {
@@ -43,4 +27,6 @@ process.on("SIGTERM", () => {
   stan.close();
 });
 
+//need run skaffold
+//we use kubectl port-forward nats-depl-75b9dff744-m4kr8 4222:4222
 //http://localhost:8222/streaming/channelsz?subs=1
