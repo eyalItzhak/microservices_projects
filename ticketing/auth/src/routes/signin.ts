@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator"; //Middleware that validate the data that came on body from web
 import jwt from "jsonwebtoken";
-import { validateRequest, BedRequestError } from "@eyaltickets/common";
+import { validateRequest, BadRequestError } from "@eyaltickets/common";
 import { User } from "../models/users";
 import { Password } from "../services/password";
 
@@ -22,7 +22,7 @@ router.post(
 
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-      throw new BedRequestError("Invalid credential");
+      throw new BadRequestError("Invalid credential");
     }
     const passwordMatch = await Password.compare(
       existingUser.password,
@@ -30,7 +30,7 @@ router.post(
     ); //compare hush password vs not hash password
 
     if (!passwordMatch) {
-      throw new BedRequestError("Invalid credential");
+      throw new BadRequestError("Invalid credential");
     }
     // Generate JWT
     const userJwt = jwt.sign(
