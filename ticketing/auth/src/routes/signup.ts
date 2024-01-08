@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { User } from "../models/users";
-import { validateRequest, BedRequestError } from "@eyaltickets/common";
+import { validateRequest, BadRequestError } from "@eyaltickets/common";
 
 import jwt from "jsonwebtoken";
 
@@ -22,7 +22,7 @@ router.post(
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new BedRequestError("email in use");
+      throw new BadRequestError("email in use");
     }
     const user = User.build({ email, password });
     await user.save();
