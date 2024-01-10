@@ -60,6 +60,7 @@ router.post(
 
     // Publish an event saying that an order was created
     new OrderCreatedPublisher(natsWrapper.client).publish({
+      version: order.version,
       id: order.id,
       status: order.status,
       userId: order.userId,
