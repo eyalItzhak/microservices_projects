@@ -5,7 +5,7 @@ import {
   requireAuth,
 } from "@eyaltickets/common";
 import { Order, OrderStatus } from "../models/orders";
-import { OrderCancelledPublisher } from "../publishers/order-cancelled-publisher";
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
 import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();

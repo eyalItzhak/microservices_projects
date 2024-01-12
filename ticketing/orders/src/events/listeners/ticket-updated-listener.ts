@@ -1,16 +1,13 @@
 import { Message } from "node-nats-streaming";
 import { Subjects, Listener, TicketUpdatedEvent } from "@eyaltickets/common";
-import { Ticket } from "../models/ticket";
+import { Ticket } from "../../models/ticket";
 import { queueGroupName } from "./queue-group-name";
 
 export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
   readonly subject = Subjects.TicketUpdated;
   queueGroupName = queueGroupName; // only one service will get the msg from NATS
   async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
-    const ticket = await Ticket.findOne({
-      _id: data.id,
-      version: data.version - 1,
-    });
+    const ticket = await Ticket.findByEvent(data);
 
     if (!ticket) {
       throw new Error("Ticket not found");
