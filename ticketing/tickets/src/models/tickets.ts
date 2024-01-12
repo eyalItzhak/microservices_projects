@@ -11,6 +11,7 @@ interface TicketDoc extends mongoose.Document {
   price: number;
   userId: string;
   version: number; // track by mongoose with updateIfCurrentPlugin
+  orderId?: string;
 }
 
 interface TicketModel extends mongoose.Model<TicketDoc> {
@@ -22,6 +23,7 @@ const ticketSchema = new mongoose.Schema(
     title: { type: String, require: true },
     price: { type: Number, require: true },
     userId: { type: String, require: true },
+    orderId: { type: String },
   },
   {
     toJSON: {
