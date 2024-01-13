@@ -14,7 +14,7 @@ spec:
     spec: ## spec of the pod
       containers:
         - name: expiration-radis
-          image: mongo ##from dockerHub
+          image: redis ##from dockerHub
 ---
 apiVersion: v1
 kind: Service
