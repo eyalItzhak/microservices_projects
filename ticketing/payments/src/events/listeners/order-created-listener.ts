@@ -6,7 +6,7 @@ import {
 } from "@eyaltickets/common";
 import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-group-name";
-import { Order } from "../../models/orders";
+import { Order } from "../../models/order";
 
 export class orderCreatedListener extends Listener<OrderCreatedEvent> {
   readonly subject = Subjects.OrderCreated;
@@ -20,7 +20,7 @@ export class orderCreatedListener extends Listener<OrderCreatedEvent> {
       version: data.version,
     });
 
-    order.save();
+    await order.save();
     msg.ack();
   }
 }
