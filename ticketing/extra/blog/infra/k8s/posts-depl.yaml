@@ -1,0 +1,32 @@
+#deployment of posts
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1 #Running pods
+  selector: # selector and metadata working together => selector say to the deployment what pods it need to mange
+    matchLabels:
+      app: posts #seek the identify call "posts"
+  template: #actual create the pods
+    metadata:
+      labels: #the identify of the pod
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: eyalpross101/posts ##latest ==> when run kubectl rollout restart deployment posts-depl its take the latest version from docker hub
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-clusterip-srv
+spec:
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000 #open port 4005 on the node
+      targetPort: 4000 #direct the traffic inside the node to port 4005
+

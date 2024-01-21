@@ -1,0 +1,36 @@
+docker start -a 09b884cee01d    ===> crate + run 
+
+docker run busybox echo hi there ===>  run container by name busybox with command echo hi there
+
+docker create hello-world ===>  create container name "hello-wolrd", if not found image local try to find in on 
+
+docker ps ===>  running container 
+
+docker ps --all ===>  all arunning containers
+
+docker system prune ===>  delete all docker "products"
+
+docker logs <container id> ==> need to do docker start before
+
+docker stop <container id> ==> say the process inside the process to self-close --> less brutal from the "kill" command.
+
+docker kill <container id> ==> force stop of container
+
+docker exec -it 6ae7ef3e1565 redis-cli ==> run inside container some coomand
+
+docker exec -it 6ae7ef3e156 sh ==>open contianer with shell
+
+docker run -it busybox sh ==> run busy box with shell
+
+docker build -t  eyalpross101/redis:latest . ==> Build with a nametag
+
+docker commit -c 'CMD ["radius-server"]' ce7a189ea9f8 ==> create an image from the running container.
+
+docker commit -c "CMD 'redis-server'" ce7a189ea9f8  ==> same as before but for Windows.
+
+docker push eyalpross101/posts ==> push to dockerHub
+
+
+
+
+
