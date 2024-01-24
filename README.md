@@ -1,50 +1,4 @@
 
-# Ticketing - asynchronous microservices project
-
-
-The purpose of this project is to produce a good infrastructure for working with a microservice architecture using MongoDB, NATS, Kubernetes, Express, nextjs and more.
-
-The system offers the publication of concert tickets for sale and their purchase within a certain time frame where the emphasis in this project is on the server side while the client side is very basic.
-
-
-## Installation
-
-In order to install and run the project, several things must be downloaded and installed.
-
-    1. Docker + Kubernetes
-    2. Ingress nginx
-    3. Skaffold
-    4. Node.js
-
-#### Docker + Kubernetes:
-
-[download]( https://www.docker.com/ )
-#### Ingress nginx:
-[download]( https://kubernetes.github.io/ingress-nginx )
-or use this command 
-```bash
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
-```
-#### Skaffold:
-You need to download and install chocolatey individual first -
-[download]( https://chocolatey.org/install)
-Then run the following commands on bash:
-
-```bash
-Run "Get-ExecutionPolicy"
-```
-If it returns Restricted, then run
-```bash
-Set-ExecutionPolicy AllSigned
-```
-or
-```bash
-Set-ExecutionPolicy Bypass -Scope Process
-```
-then run :
-```bash
-choco install -y skaffold
-```
 ## API Reference
 
 ### auth service
@@ -59,7 +13,7 @@ choco install -y skaffold
 | `email` | `string` | **Required** |
 | `password` | `string` | **Required** |
 
-     retrun cookie + user details and registers the user to the system
+retrun cookie + user details and registers the user to the system
 
 
 #### signin:
@@ -73,7 +27,7 @@ choco install -y skaffold
 | `email` | `string` | **Required** |
 | `password` | `string` | **Required** |
 
-     retrun cookie + user details If the user is registered to the system
+retrun cookie + user details If the user is registered to the system
 
 
 #### currentuser:
@@ -85,7 +39,7 @@ choco install -y skaffold
 | :-------- | :------- | :------------------------- |
 | `empty` | `emptyObject` | **body need to be empty** |
     
-    If a suitable cookie is provided, the logged in user information will be returned
+If a suitable cookie is provided, the logged in user information will be returned
 
 
 
@@ -98,7 +52,7 @@ choco install -y skaffold
 | :-------- | :------- | :------------------------- |
 | `empty` | `emptyObject` | **body need to be empty** |
     
-    remove cookie
+remove cookie
 
 
 ### order service
@@ -112,7 +66,7 @@ choco install -y skaffold
 | :-------- | :------- | :------------------------- |
 | `ticketId` | `string` | **Required** |
     
-    create an order.
+create an order.
 
 
 #### order create:
@@ -124,7 +78,7 @@ choco install -y skaffold
 | :-------- | :------- | :------------------------- |
 | `empty` | `emptyObject` | **body need to be empty** |
     
-    get all order.
+get all order.
 
 ### payments service
 #### payments create:
@@ -132,8 +86,8 @@ choco install -y skaffold
 | :-------- | :------- | :------------------------- |
 | `orderId` | `string` | **Required** |
 | `token` | `string` | **Required** |
-    create an payments.
-    token come from Stripe or use the val "tok_visa" when dev.
+create an payments.
+token come from Stripe or use the val "tok_visa" when dev.
 
 ### tickets service
 #### tickets create:
@@ -145,7 +99,7 @@ choco install -y skaffold
 | `title` | `string` | **Required** |
 | `price` | `number` | **Required** |
     
-    create an ticket.
+create an ticket.
 
 
 #### get ticket:
@@ -156,7 +110,7 @@ choco install -y skaffold
 | :-------- | :------- | :------------------------- |
 | `empty` | `emptyObject` | **body need to be empty** |
     
-    get an ticket with id of {ticketId}.
+get an ticket with id of {ticketId}.
 
 #### get tickets:
 ```http
@@ -166,7 +120,7 @@ choco install -y skaffold
 | :-------- | :------- | :------------------------- |
 | `empty` | `emptyObject` | **body need to be empty** |
     
-    get all tickets.
+get all tickets.
 
 #### update ticket:
 ```http
@@ -177,4 +131,4 @@ choco install -y skaffold
 | `title` | `string` | **Required** |
 | `price` | `number` | **Required** |
     
-    update a ticket.
+update a ticket.
