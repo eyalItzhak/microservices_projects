@@ -1,4 +1,50 @@
 
+# Ticketing - asynchronous microservices project
+
+
+The purpose of this project is to produce a good infrastructure for working with a microservice architecture using MongoDB, NATS, Kubernetes, Express, nextjs and more.
+
+The system offers the publication of concert tickets for sale and their purchase within a certain time frame where the emphasis in this project is on the server side while the client side is very basic.
+
+
+## Installation
+
+In order to install and run the project, several things must be downloaded and installed.
+
+    1. Docker + Kubernetes
+    2. Ingress nginx
+    3. Skaffold
+    4. Node.js
+
+#### Docker + Kubernetes:
+
+[download]( https://www.docker.com/ )
+#### Ingress nginx:
+[download]( https://kubernetes.github.io/ingress-nginx )
+or use this command 
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+```
+#### Skaffold:
+You need to download and install chocolatey individual first -
+[download]( https://chocolatey.org/install)
+Then run the following commands on bash:
+
+```bash
+Run "Get-ExecutionPolicy"
+```
+If it returns Restricted, then run
+```bash
+Set-ExecutionPolicy AllSigned
+```
+or
+```bash
+Set-ExecutionPolicy Bypass -Scope Process
+```
+then run :
+```bash
+choco install -y skaffold
+```
 ## API Reference
 
 ### auth service
