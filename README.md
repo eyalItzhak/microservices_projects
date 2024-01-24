@@ -45,6 +45,20 @@ then run :
 ```bash
 choco install -y skaffold
 ```
+---
+After that, you need to add the following line of code to the host file.
+```bash
+127.0.0.1 ticketing.dev 
+```
+on windows the path is :
+```bash
+C:\Windows\System32\drivers\etc\hosts
+```
+---
+Note : you must upload the images to your Docker user and change in the k8s folder the appearances of "eyalpross101"to your Docker username.
+
+
+To run the project, all you have to do is write the following command in cmd: skaffold dev
 ## API Reference
 
 ### auth service
@@ -80,11 +94,7 @@ retrun cookie + user details If the user is registered to the system
 
 ```http
   GET https://ticketing.dev/api/users/currentuser
-```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `empty` | `emptyObject` | **body need to be empty** |
-    
+```    
 If a suitable cookie is provided, the logged in user information will be returned
 
 
@@ -94,13 +104,10 @@ If a suitable cookie is provided, the logged in user information will be returne
 ```http
   GET https://ticketing.dev/api/users/singout
 ```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `empty` | `emptyObject` | **body need to be empty** |
     
 remove cookie
 
-
+---
 ### order service
 
 #### order create:
@@ -115,17 +122,21 @@ remove cookie
 create an order.
 
 
-#### order create:
+#### get all order:
 
 ```http
   GET https://ticketing.dev/api/orders
 ```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `empty` | `emptyObject` | **body need to be empty** |
-    
 get all order.
 
+#### get specific order
+```http
+  GET https://ticketing.dev/api/orders/{orderId}
+```
+get specific order
+    
+
+---
 ### payments service
 #### payments create:
 | Parameter | Type     | Description                |
@@ -134,7 +145,7 @@ get all order.
 | `token` | `string` | **Required** |
 create an payments.
 token come from Stripe or use the val "tok_visa" when dev.
-
+---
 ### tickets service
 #### tickets create:
 ```http
@@ -152,20 +163,13 @@ create an ticket.
 ```http
   GET https://ticketing.dev/api/tickets/{ticketId}
 ```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `empty` | `emptyObject` | **body need to be empty** |
     
 get an ticket with id of {ticketId}.
 
 #### get tickets:
 ```http
   GET https://ticketing.dev/api/tickets
-```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `empty` | `emptyObject` | **body need to be empty** |
-    
+```    
 get all tickets.
 
 #### update ticket:
