@@ -7,6 +7,18 @@ The purpose of this project is to produce a good infrastructure for working with
 The system offers the publication of concert tickets for sale and their purchase within a certain time frame where the emphasis in this project is on the server side while the client side is very basic.
 
 
+## Architecture
+
+![Untitled Diagram drawio (3)](https://github.com/eyalItzhak/microservices_projects/assets/62293316/4140b6b1-8125-4c56-a8fa-7fd9fec75327)
+
+
+http requests reach ingress-nginx which, according to the url, determines which service to direct the request to.
+Each service is independent, meaning it has its own db and does not communicate directly with other services. The communication between the services is done with event bus (NATS).
+TS was used in order to maintain consistency between the services and common code sections between them were uploaded to npm.
+
+In the [shared library](https://github.com/eyalItzhak/microservices-common) ([npm](https://www.npmjs.com/package/@eyaltickets/common)) you can found: custom errors, middlewares and events. 
+
+
 ## Installation
 
 In order to install and run the project, several things must be downloaded and installed.
