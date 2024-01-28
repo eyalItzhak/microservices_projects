@@ -1,196 +1,213 @@
+# Ticketing System - Asynchronous Microservices Project
 
-# Ticketing - asynchronous microservices project
-
-
-The purpose of this project is to produce a good infrastructure for working with a microservice architecture using MongoDB, NATS, Kubernetes, Express, nextjs and more.
-
-The system offers the publication of concert tickets for sale and their purchase within a certain time frame where the emphasis in this project is on the server side while the client side is very basic.
-
+This project aims to create a robust infrastructure for a microservices architecture using MongoDB, NATS, Kubernetes, Express, Next.js, and more. The system allows for the listing and purchasing of concert tickets within a specific time frame. The primary focus of this project is on the server-side, while the client-side is kept simple.
 
 ## Architecture
 
-![Untitled Diagram drawio (3)](https://github.com/eyalItzhak/microservices_projects/assets/62293316/4140b6b1-8125-4c56-a8fa-7fd9fec75327)
+![Architecture Diagram](https://github.com/eyalItzhak/microservices_projects/assets/62293316/4140b6b1-8125-4c56-a8fa-7fd9fec75327)
 
+HTTP requests are directed to the appropriate service by ingress-nginx based on the URL. Each service is independent, with its own database, and does not directly communicate with other services. Inter-service communication is handled by an event bus (NATS). TypeScript was used to maintain consistency across services, and common code sections were published to npm.
 
-http requests reach ingress-nginx which, according to the url, determines which service to direct the request to.
-Each service is independent, meaning it has its own db and does not communicate directly with other services. The communication between the services is done with event bus (NATS).
-TS was used in order to maintain consistency between the services and common code sections between them were uploaded to npm.
-
-In the [shared library](https://github.com/eyalItzhak/microservices-common) ([npm](https://www.npmjs.com/package/@eyaltickets/common)) you can found: custom errors, middlewares and events. 
-
+The [shared library](https://github.com/eyalItzhak/microservices-common) ([npm](https://www.npmjs.com/package/@eyaltickets/common)) includes custom errors, middlewares, and events.
 
 ## Installation
 
-In order to install and run the project, several things must be downloaded and installed.
+To install and run the project, the following prerequisites must be installed:
 
-    1. Docker + Kubernetes
-    2. Ingress nginx
-    3. Skaffold
-    4. Node.js
+1. Docker + Kubernetes
+2. Ingress nginx
+3. Skaffold
+4. Node.js
 
-#### Docker + Kubernetes:
+### Docker + Kubernetes:
 
-[download]( https://www.docker.com/ )
-#### Ingress nginx:
-[download]( https://kubernetes.github.io/ingress-nginx )
-or use this command 
+[Download Docker + Kubernetes](https://www.docker.com/)
+
+### Ingress nginx:
+
+[Download Ingress nginx](https://kubernetes.github.io/ingress-nginx)
+
+Alternatively, use this command:
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
 ```
+
 #### Skaffold:
-You need to download and install chocolatey individual first -
-[download]( https://chocolatey.org/install)
-Then run the following commands on bash:
+
+First, download and install Chocolatey:
+[download](https://chocolatey.org/install)
+Then, run the following commands in bash:
 
 ```bash
-Run "Get-ExecutionPolicy"
+"Get-ExecutionPolicy"
 ```
-If it returns Restricted, then run
+
+If it returns "Restricted", then run:
+
 ```bash
 Set-ExecutionPolicy AllSigned
 ```
+
 or
+
 ```bash
 Set-ExecutionPolicy Bypass -Scope Process
 ```
-then run :
+
+Finally, install Skaffold:
+
 ```bash
 choco install -y skaffold
 ```
+
 ---
-After that, you need to add the following line of code to the host file.
+
+After installation, add the following line to your host file:
+
 ```bash
-127.0.0.1 ticketing.dev 
+127.0.0.1 ticketing.dev
 ```
-on windows the path is :
+
+On Windows, the path to the host file is:
+
 ```bash
 C:\Windows\System32\drivers\etc\hosts
 ```
+
 ---
-Note : you must upload the images to your Docker user and change in the k8s folder the appearances of "eyalpross101"to your Docker username.
 
+Note: You must upload the images to your Docker user and replace "eyalpross101" in the k8s folder with your Docker username.
 
-To run the project, all you have to do is write the following command in cmd: skaffold dev
+To run the project, execute the following command in your terminal:
+
+```bash
+skaffold dev
+```
+
 ## API Reference
 
-### auth service
-#### signup
+### Auth Service
+
+#### Signup
 
 ```http
   POST https://ticketing.dev/api/users/signup
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `email` | `string` | **Required** |
+| Parameter  | Type     | Description  |
+| :--------- | :------- | :----------- |
+| `email`    | `string` | **Required** |
 | `password` | `string` | **Required** |
 
-retrun cookie + user details and registers the user to the system
+Retrun session cookie + user details and registers the user to the system.
 
-
-#### signin:
+#### Signin:
 
 ```http
   POST https://ticketing.dev/api/users/signin
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `email` | `string` | **Required** |
+| Parameter  | Type     | Description  |
+| :--------- | :------- | :----------- |
+| `email`    | `string` | **Required** |
 | `password` | `string` | **Required** |
 
-retrun cookie + user details If the user is registered to the system
+Retrun session cookie + user details If the user is registered to the system.
 
-
-#### currentuser:
+#### Current User:
 
 ```http
   GET https://ticketing.dev/api/users/currentuser
-```    
-If a suitable cookie is provided, the logged in user information will be returned
+```
 
+If a suitable cookie is provided, the logged in user information will be returned.
 
-
-#### singout:
+#### Signout:
 
 ```http
-  GET https://ticketing.dev/api/users/singout
+  GET https://ticketing.dev/api/users/signout
 ```
-    
-remove cookie
+
+Remove session cookie.
 
 ---
-### order service
 
-#### order create:
+### Order Service
+
+Manages ticket orders.
+
+#### Create Order:
 
 ```http
   POST https://ticketing.dev/api/orders
 ```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
+
+| Parameter  | Type     | Description  |
+| :--------- | :------- | :----------- |
 | `ticketId` | `string` | **Required** |
-    
-create an order.
 
-
-#### get all order:
+#### Get All Orders:
 
 ```http
   GET https://ticketing.dev/api/orders
 ```
-get all order.
 
-#### get specific order
+#### Get Specific Order:
+
 ```http
   GET https://ticketing.dev/api/orders/{orderId}
 ```
-get specific order
-    
 
 ---
-### payments service
-#### payments create:
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
+
+### Payments Service
+
+Handles payment processing.
+
+#### Create Payment:
+
+| Parameter | Type     | Description  |
+| :-------- | :------- | :----------- |
 | `orderId` | `string` | **Required** |
-| `token` | `string` | **Required** |
-create an payments.
-token come from Stripe or use the val "tok_visa" when dev.
+| `token`   | `string` | **Required** |
+
 ---
-### tickets service
-#### tickets create:
+
+### Tickets Service
+
+Manages ticket listings.
+
+#### Create Ticket:
+
 ```http
   POST https://ticketing.dev/api/tickets
 ```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `title` | `string` | **Required** |
-| `price` | `number` | **Required** |
-    
-create an ticket.
 
+| Parameter | Type     | Description  |
+| :-------- | :------- | :----------- |
+| `title`   | `string` | **Required** |
+| `price`   | `number` | **Required** |
 
-#### get ticket:
+#### Get Ticket:
+
 ```http
   GET https://ticketing.dev/api/tickets/{ticketId}
 ```
-    
-get an ticket with id of {ticketId}.
 
-#### get tickets:
+#### Get All Tickets:
+
 ```http
   GET https://ticketing.dev/api/tickets
-```    
-get all tickets.
+```
 
-#### update ticket:
+#### Update Ticket
+
 ```http
   PUT https://ticketing.dev/api/tickets/{ticketId}
 ```
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `title` | `string` | **Required** |
-| `price` | `number` | **Required** |
-    
-update a ticket.
+
+| Parameter | Type     | Description  |
+| :-------- | :------- | :----------- |
+| `title`   | `string` | **Required** |
+| `price`   | `number` | **Required** |

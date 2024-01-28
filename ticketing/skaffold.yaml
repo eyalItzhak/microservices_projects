@@ -7,7 +7,7 @@ deploy:
 build:
   local:
     push: false
-  artifacts: #detect change on auth file and change the image
+  artifacts:
     - image: eyalpross101/auth
       context: auth
       docker:

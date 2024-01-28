@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: client-depl
 spec:
-  replicas: 1 #we want only one pod
+  replicas: 1
   selector:
     matchLabels:
       app: client

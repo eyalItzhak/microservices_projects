@@ -4,17 +4,17 @@ metadata:
   name: orders-mongo-depl
 spec:
   replicas: 1
-  selector: ##what pod to find the pods
+  selector:
     matchLabels:
       app: orders-mongo
   template:
-    metadata: ## the label that apply to the pod
+    metadata:
       labels:
         app: orders-mongo
-    spec: ## spec of the pod
+    spec:
       containers:
         - name: orders-mongo
-          image: mongo ##from dockerHub
+          image: mongo
 ---
 apiVersion: v1
 kind: Service
@@ -22,9 +22,9 @@ metadata:
   name: orders-mongo-srv
 spec:
   selector:
-    app: orders-mongo ##what pod to get access to
+    app: orders-mongo
   ports:
     - name: db
       protocol: TCP
-      port: 27017 ##mongo default port
-      targetPort: 27017 ##mongo default port
+      port: 27017
+      targetPort: 27017

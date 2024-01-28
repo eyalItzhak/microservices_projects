@@ -4,17 +4,17 @@ metadata:
   name: payments-mongo-depl
 spec:
   replicas: 1
-  selector: ##what pod to find the pods
+  selector:
     matchLabels:
       app: payments-mongo
   template:
-    metadata: ## the label that apply to the pod
+    metadata:
       labels:
         app: payments-mongo
-    spec: ## spec of the pod
+    spec:
       containers:
         - name: payments-mongo
-          image: mongo ##from dockerHub
+          image: mongo
 ---
 apiVersion: v1
 kind: Service
@@ -22,9 +22,9 @@ metadata:
   name: payments-mongo-srv
 spec:
   selector:
-    app: payments-mongo ##what pod to get access to
+    app: payments-mongo
   ports:
     - name: db
       protocol: TCP
-      port: 27017 ##mongo default port
-      targetPort: 27017 ##mongo default port
+      port: 27017
+      targetPort: 27017
