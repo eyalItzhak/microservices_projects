@@ -79,6 +79,10 @@ C:\Windows\System32\drivers\etc\hosts
 
 Note: You must upload the images to your Docker user and replace "eyalpross101" in the k8s folder with your Docker username.
 
+You need to define 2 environment variables through Kubernetes: jwt-secret and stripe-secret.
+The first is a private key for jwt encryption.
+The second is an ID key for the stripe credit company - you can register for free.
+
 To run the project, execute the following command in your terminal:
 
 ```bash
