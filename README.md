@@ -83,6 +83,11 @@ You need to define 2 environment variables through Kubernetes: jwt-secret and st
 The first is a private key for jwt encryption.
 The second is an ID key for the stripe credit company - you can register for free.
 
+```bash
+kubectl create secret generic jwt-secret --from-literal=JWT_KEY=your_jwt_key_here
+kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=your_stripe_key_here
+```
+
 To run the project, execute the following command in your terminal:
 
 ```bash
